@@ -1,0 +1,4 @@
+/images/*.jpeg
+/pdf/*.pdf
+set_env.txt
+shiftextractor.json
