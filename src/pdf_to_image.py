@@ -3,9 +3,9 @@ from pdf2image import convert_from_path # pdfを画像に変換する
 import os                               # ファイルパスを扱う
 
 # PDFファイルを画像に変換する
-def convert_pdf_to_images(pdf_file_path, output_folder, output_format='jpeg'):
+def convert_pdf_to_images(pdf_file_path, output_folder, output_format='jpeg', dpi=600):
     # PDFファイルを画像に変換
-    images = convert_from_path(pdf_file_path)
+    images = convert_from_path(pdf_file_path, dpi=dpi)
 
     # 画像ファイルを保存
     image_file_paths = []
