@@ -2,3 +2,4 @@
 /pdf/*.pdf
 set_env.txt
 shiftextractor.json
+/src/__pycache__/

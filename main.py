@@ -1,27 +1,17 @@
-from google.cloud import vision
-import io
+from src.pdf_to_image import convert_pdf_to_images
+from src.detect_text import detect_text
+import os
 
-def detect_text(path):
-    """Detects text in the file located in Google Cloud Storage or on the Web."""
-    client = vision.ImageAnnotatorClient()
+def main():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    pdf_file_path = os.path.join(current_dir, 'pdf', '202304.pdf')
+    output_folder = os.path.join(current_dir, 'images')
+    
+    image_file_paths = convert_pdf_to_images(pdf_file_path, output_folder)
 
-    with io.open(path, 'rb') as image_file:
-        content = image_file.read()
+    for image_file_path in image_file_paths:
+        text = detect_text(image_file_path)
+        print(f"Text extracted from {image_file_path}:\n{text}\n")
 
-    image = vision.Image(content=content)
-
-    response = client.text_detection(image=image)
-    texts = response.text_annotations
-    print('Texts:')
-
-    for text in texts:
-        print('\n"{}"'.format(text.description))
-
-    if response.error.message:
-        raise Exception(
-            '{}\nFor more info on error messages, check: '
-            'https://cloud.google.com/apis/design/errors'.format(
-                response.error.message))
-
-file_path = "path/to/your/image.jpg"
-detect_text(file_path)
+if __name__ == "__main__":
+    main()

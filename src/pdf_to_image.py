@@ -1,5 +1,4 @@
 # PDFファイルを画像に変換する
-
 from pdf2image import convert_from_path # pdfを画像に変換する
 import os                               # ファイルパスを扱う
 
@@ -17,10 +16,9 @@ def convert_pdf_to_images(pdf_file_path, output_folder, output_format='jpeg'):
 
     return image_file_paths
 
-# パスを設定
-current_dir   = os.path.dirname(os.path.abspath(__file__))
-pdf_file_path = os.path.join(current_dir, '..', 'pdf', '202304.pdf') # 画像に変換したいPDFファイルのパス
-output_folder = os.path.join(current_dir, '..', 'images')            # 画像を保存するフォルダのパス
+if __name__ == "__main__":
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    pdf_file_path = os.path.join(current_dir, '..', 'pdf', '202304.pdf')
+    output_folder = os.path.join(current_dir, '..', 'images')
+    image_file_paths = convert_pdf_to_images(pdf_file_path, output_folder)
 
-# PDFファイルを画像に変換
-image_file_paths = convert_pdf_to_images(pdf_file_path, output_folder)
